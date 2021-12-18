@@ -92,8 +92,14 @@ public class Dist {
 	}
 	
 	public static double rectaARecta_NoParalelas(double[] pos_recta1, double[] orient_recta1, double[] pos_recta2, double[] orient_recta2) {
-		double prod_mixto = MyMath.pitágoras(new double[3]); //TODO producto mixto
-		return prod_mixto / MyMath.pitágoras(MyMath.prodVectorial(orient_recta1, orient_recta2));
+		double[] prod_vec = MyMath.prodVectorial(orient_recta1, orient_recta2), vec1 = MyMath.vector(pos_recta1, pos_recta2);
+		double prod_mixto = 0;
+		for (int i = 0; i < vec1.length; i++) {
+			prod_mixto += vec1[i] * prod_vec[i];
+		}
+		prod_mixto = Math.abs(prod_mixto);
+		
+		return MyMath.fix(prod_mixto / MyMath.pitágoras(prod_vec));
 	}
 	
 	public static double puntoAPunto(int[] punto1, int[] punto2) {

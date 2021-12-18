@@ -98,7 +98,7 @@ public class Textura implements Propiedad {
 	 * @param coord - Las coordenadas, x aumenta hacia la derecha, y aumenta hacia arriba, (0,0) está en el centro de la textura
 	 * @return el color en ese píxel o null si no hay
 	 */
-	public Color colorEnPíxel(double[] coord) { //TODO no leer cada vez la textura?
+	public Color colorEnPíxel(double[] coord) {
 		if (hasPath) {
 			try {
 				BufferedImage img = ImageIO.read(new File(pathOrColor));
