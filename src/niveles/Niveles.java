@@ -77,7 +77,8 @@ public class Niveles {
 		
 		public abstract void cargar();
 	}
-
+	
+	private static final HashSet<Listener> listeners = new HashSet<>();
 	private static final ObjectContainer oc = Db4oEmbedded.openFile("niveles.niveles");
 	private static Nivel cargado;
 	private static Llave acceso_contadores;
@@ -96,6 +97,18 @@ public class Niveles {
 		long t = System.nanoTime();
 		guardar(NIVEL_CÓDIGO_1);
 		System.out.printf("Tiempo: %dns\n", System.nanoTime()-t);
+	}
+	
+	public static void añadirListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	public static void quitarListener(Listener listener) {
+		listeners.remove(listener);
+	}
+	
+	public static void quitarListeners() {
+		listeners.clear();
 	}
 	
 	public static Nivel cargado() {
@@ -118,6 +131,9 @@ public class Niveles {
 		Contador.reset(acceso_contadores);
 		Iluminación.getLuces().clear();
 		cargado.cargar();
+		for (Listener listener : listeners) {
+			listener.react();
+		}
 	}
 	
 	/**

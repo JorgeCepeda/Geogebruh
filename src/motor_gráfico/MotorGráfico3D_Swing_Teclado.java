@@ -73,12 +73,9 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico {
 	 */
 	private void initialize() {
 		Objetos.init();
-		pos = Niveles.cargado().getPos();
+		Niveles.añadirListener(this);
+		react();
 		Chunks.cargar(pos, 3);
-		double[] ángulos = Niveles.cargado().getRotación();
-		teta_hori = ángulos[0];
-		teta_vert = ángulos[1];
-		teta_inclin = ángulos[2];
 		
 		frmMotorGráfico = new JFrame();
 		frmMotorGráfico.setTitle("exe.exe - Geoge🅱ruh");
@@ -227,5 +224,14 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico {
 			}
 	        return false;
 		});
+	}
+
+	@Override
+	public void react() {
+		pos = Niveles.cargado().getPos();
+		double[] ángulos = Niveles.cargado().getRotación();
+		teta_hori = ángulos[0];
+		teta_vert = ángulos[1];
+		teta_inclin = ángulos[2];
 	}
 }

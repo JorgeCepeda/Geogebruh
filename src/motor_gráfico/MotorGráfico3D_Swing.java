@@ -23,7 +23,6 @@ import java.awt.Color;
 import objetos.Cámara;
 import objetos.Objetos;
 import operaciones.MyMath;
-import otros.Tareas;
 
 public class MotorGráfico3D_Swing implements MotorGráfico {
 	private double[] pos;
@@ -75,12 +74,9 @@ public class MotorGráfico3D_Swing implements MotorGráfico {
 	 */
 	private void initialize() {
 		Objetos.init();
-		pos = Niveles.cargado().getPos();
+		Niveles.añadirListener(this);
+		react();
 		Chunks.cargar(pos, 3);
-		double[] ángulos = Niveles.cargado().getRotación();
-		teta_hori = ángulos[0];
-		teta_vert = ángulos[1];
-		teta_inclin = ángulos[2];
 		
 		frmMotorGráfico = new JFrame();
 		frmMotorGráfico.setTitle("exe.exe - Geoge🅱ruh");
@@ -237,5 +233,14 @@ public class MotorGráfico3D_Swing implements MotorGráfico {
 		});
 		btnPrecisión.setBounds(508, 32, 115, 23);
 		frmMotorGráfico.add(btnPrecisión);
+	}
+	
+	@Override
+	public void react() {
+		pos = Niveles.cargado().getPos();
+		double[] ángulos = Niveles.cargado().getRotación();
+		teta_hori = ángulos[0];
+		teta_vert = ángulos[1];
+		teta_inclin = ángulos[2];
 	}
 }
