@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 
+import gráficos.Pantalla;
 import objetos.Fotón;
 import objetos.Objetos;
 import objetos.PrismaInvisible;
@@ -19,6 +20,7 @@ public class Textura implements Propiedad {
 	
 	private PrismaInvisible prisma_colisión;
 	private String pathOrColor;
+	private Pantalla pantalla;
 	private double escala_x = 1, escala_y = 1;
 	private boolean hasPath;
 	
@@ -27,6 +29,11 @@ public class Textura implements Propiedad {
 		setPathOrColor(pathOrColor, isPath);
 	}
 	
+	public Textura(PrismaInvisible caja_colisión, Pantalla pantalla) {
+		setPrisma(caja_colisión);
+		setPantalla(pantalla);
+	}
+
 	public Textura(PrismaInvisible caja_colisión) {
 		setPrisma(caja_colisión);
 	}
@@ -37,6 +44,7 @@ public class Textura implements Propiedad {
 		escala_x = t.escala_x;
 		escala_y = t.escala_y;
 		hasPath = t.hasPath;
+		pantalla = t.pantalla;
 	}
 	
 	public Textura() {}
@@ -51,6 +59,16 @@ public class Textura implements Propiedad {
 	
 	public void setPrisma(PrismaInvisible prisma_colisión) {
 		this.prisma_colisión = prisma_colisión;
+	}
+	
+	public Pantalla getPantalla() {
+		return pantalla;
+	}
+	
+	public void setPantalla(Pantalla pantalla) {
+		this.pantalla = pantalla;
+		pathOrColor = null;
+		hasPath = false;
 	}
 	
 	public double getEscalaX() {
@@ -82,6 +100,7 @@ public class Textura implements Propiedad {
 	public void setPathOrColor(String pathOrColor, boolean isPath) {
 		this.pathOrColor = isPath ? pathOrColor : EngHexDec.getHex6(pathOrColor);
 		hasPath = isPath;
+		pantalla = null;
 	}
 
 	/**
@@ -112,6 +131,18 @@ public class Textura implements Propiedad {
 				e.printStackTrace();
 				return null;
 			}
+		}
+		if (pantalla != null) {
+			if (pantalla.tabla_color() != null) {
+				int[] dimens = pantalla.getDimensiones();
+				int extra = pantalla.extra(), fila = (int) (-coord[1] / escala_y + dimens[0] / 2.0) + extra, columna = (int) (coord[0] / escala_x + dimens[1] / 2.0) + extra;
+				String color;
+				
+				if (MyMath.esVálido(fila, columna, pantalla.tabla_color(), extra) && (color = pantalla.tabla_color()[fila][columna]) != null) {
+					return new Color(color, true);
+				}
+			}
+			return new Color("#000000", true); // Se supone que el vacío es negro
 		}
 		return new Color(pathOrColor, true);
 	}

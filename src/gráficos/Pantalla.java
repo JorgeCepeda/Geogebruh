@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,7 +24,8 @@ import objetos.propiedades.Textura;
 import operaciones.*;
 import otros.Tareas;
 
-public class Pantalla {
+public class Pantalla implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private static AtomicInteger hilos_corriendo = new AtomicInteger();
 	private Cámara cámara;
 	private double[][][] tabla_pos;

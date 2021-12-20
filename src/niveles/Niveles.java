@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -16,6 +17,8 @@ import com.db4o.query.Query;
 
 import chunks_NoCeldas.Chunks;
 import efectos.Iluminación;
+import gráficos.Pantalla;
+import gráficos.PantallaMultihilo;
 import objetos.*;
 import objetos.Prisma.Bases;
 import objetos.abstracto.Objeto;
@@ -24,6 +27,7 @@ import objetos.abstracto.ObjetoCompuesto;
 import objetos.abstracto.Objeto.Ref;
 import objetos.propiedades.Borde;
 import objetos.propiedades.Textura;
+import operaciones.MyMath;
 import otros.Contador;
 import otros.Llave;
 import otros.Tareas;
@@ -265,18 +269,45 @@ public class Niveles {
 			Esfera esfera3 = new Esfera(new double[] {-30,25,15}, 10, "blue");
 			añadir(esfera3);
 			Cubo cubo = new Cubo(new double[] {20,20,20}, 10, "red");
+			Textura hierba = new Textura(
+				new PrismaInvisible(new double[] {-5,0,0}, 5, Ref.CENTRO, new Object[] {11.0,11.0}, Bases.RECTANGULAR),
+				"textures/grass.png",
+				true
+			);
+			hierba.setEscala(10.0/16, 10.0/16);
+			Textura.añadir(cubo, hierba);
+			
 			añadir(cubo);
 			ObjCompTest objcomp1 = new ObjCompTest(new double[] {10,50,10}, "blue");
 			añadir(objcomp1);
 			Objeto prisma1 = new Prisma(new double[] {35,20,20}, 15, "purple", Ref.CENTRO, new Object[] {8.0 /*eje_vert*/, 5.0 /*eje_hori*/}, Bases.RECTANGULAR);
 			añadir(prisma1);
+			Luz luz1 = new Luz(new double[] {20,40,0}, "#33ee33", 6);
+			añadir(luz1);
+			Luz luz2 = new Luz(new double[] {40,40,10}, "pink", 5);
+			añadir(luz2);
+			luz2.setEncendida(false);
+			Luz luz3 = new Luz(new double[] {40,40,-20}, "white", 10);
+			añadir(luz3);
 			
 			esfera2.cambiarPropiedad(ObjetoBase.BORDE, new Borde("blue", 2, 'R'));
 			prisma1.setRotaciónYOrient(new double[] {0,0,Math.PI/4});
-			objcomp1.objs().add(esfera1);
-			objcomp1.objs().add(esfera2);
-			objcomp1.objs().add(esfera3);
-			//objcomp1.objs().add(objcomp1);
+			
+			esfera2.cambiarPropiedad(ObjetoBase.BORDE, new Borde("blue", 2, 'R'));
+			prisma1.setRotaciónYOrient(new double[] {0,0,Math.PI/4});
+			
+			Cámara cámara = new Cámara(new double[] {3.8, 10, -14.95}, 30, true);
+			cámara.setRotaciónYOrient(new double[] {0.5, 0.707, 0.5}, Math.PI/8);
+			cámara.setTeta_CDV(MyMath.fix(45 * Math.PI / 180));
+			Pantalla pantalla = new PantallaMultihilo(30, 30, 4, false, cámara);
+			pantalla.setIluminada(true);
+			
+			PrismaInvisible prismaInv = new PrismaInvisible(new double[] {0,0,-5}, 5, Ref.CENTRO, new Object[] {11.0,11.0}, Bases.RECTANGULAR);
+			prismaInv.setRotaciónYOrient(new double[] {0,0,1}, 0);
+			Textura pantallaTex = new Textura(prismaInv, pantalla);
+			pantallaTex.setEscala(10.0/30, 10.0/30);
+			Textura.añadir(cubo, pantallaTex);
+			Tareas.timers.getES().schedule(pantalla::renderizar, 10, TimeUnit.SECONDS); // Diferir dibujado, suponiendo que entonces se haya cargado mapa
 		}
 	}, NIVEL_CÓDIGO_3 = new Nivel(new double[] {10,15,-10}, new double[] {Math.PI/2,0,0}, "nivel_3") {
 		@Override

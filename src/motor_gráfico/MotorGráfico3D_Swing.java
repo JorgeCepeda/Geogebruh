@@ -73,9 +73,8 @@ public class MotorGráfico3D_Swing implements MotorGráfico {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		Objetos.init();
 		Niveles.añadirListener(this);
-		react();
+		Objetos.init();
 		Chunks.cargar(pos, 3);
 		
 		frmMotorGráfico = new JFrame();

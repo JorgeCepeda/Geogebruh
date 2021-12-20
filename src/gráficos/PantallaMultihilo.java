@@ -9,6 +9,8 @@ import operaciones.MyMath;
 import otros.Tareas;
 
 public class PantallaMultihilo extends Pantalla { //TODO puede ser útil pasar la creación de secciones a la inicialización y tener un método para pasarle datos, para cuando se reutilice una pantalla, hasta entonces no hace falta
+	private static final long serialVersionUID = 1L;
+
 	private class Sección implements Runnable {
 		private Object[] datos_píxel;
 		private PantallaMultihilo p;

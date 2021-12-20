@@ -8,7 +8,6 @@ import operaciones.Vector;
 
 public abstract class ObjetoBase implements Serializable {
 	public static final String COLOR = "color", BORDE = "borde";
-	
 	private static final long serialVersionUID = 1L;
 	
 	/**
