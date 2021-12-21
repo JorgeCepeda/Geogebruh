@@ -3,6 +3,8 @@ package motor_gráfico.menús;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 import motor_gráfico.MotorGráfico;
 import niveles.Niveles;
 import niveles.Niveles.Nivel;
@@ -37,7 +39,7 @@ public class MenúNiveles extends Menú {
 		consejos.add("Shakespeare una vez dijo: \"An SSL error has occurred and a secure connection to the server cannot be made\"");
 	}
 	
-	public MenúNiveles(MotorGráfico motor_gráfico) {
+	public MenúNiveles(MotorGráfico<JLabel> motor_gráfico) {
 		super(motor_gráfico, false);
 		tamaño_texto = 20;
 	}

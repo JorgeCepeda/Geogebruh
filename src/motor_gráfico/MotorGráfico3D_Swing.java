@@ -24,7 +24,7 @@ import objetos.Cámara;
 import objetos.Objetos;
 import operaciones.MyMath;
 
-public class MotorGráfico3D_Swing implements MotorGráfico {
+public class MotorGráfico3D_Swing implements MotorGráfico<JLabel> {
 	private double[] pos;
 	private double teta_hori, teta_vert, teta_inclin, delta_teta = Math.PI/8;
 	private boolean swBorde, swPrecisión;
@@ -57,16 +57,6 @@ public class MotorGráfico3D_Swing implements MotorGráfico {
 	 */
 	public MotorGráfico3D_Swing() {
 		initialize();
-	}
-
-	@Override
-	public Pantalla getPantalla() {
-		return pantalla;
-	}
-	
-	@Override
-	public JLabel getJLabel() {
-		return lblSalida;
 	}
 
 	/**
@@ -241,5 +231,15 @@ public class MotorGráfico3D_Swing implements MotorGráfico {
 		teta_hori = ángulos[0];
 		teta_vert = ángulos[1];
 		teta_inclin = ángulos[2];
+	}
+
+	@Override
+	public Pantalla getPantalla() {
+		return pantalla;
+	}
+	
+	@Override
+	public JLabel getSalida() {
+		return lblSalida;
 	}
 }

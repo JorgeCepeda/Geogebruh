@@ -197,7 +197,7 @@ public class Pantalla implements Serializable {
 	 * Obtener imagen en píxeles y exportar a un archivo
 	 * @return la imagen exportada
 	 */
-	public BufferedImage exportarFrame() {
+	public BufferedImage obtenerFrame(boolean exportar) {
 		int[] píxeles_int = new int[alto*ancho*3];
 		for (int i = extra; i < alto + extra; i++) {
 	        for (int j = extra; j < ancho + extra; j++) {
@@ -213,13 +213,15 @@ public class Pantalla implements Serializable {
         BufferedImage image = new BufferedImage(ancho, alto, BufferedImage.TYPE_INT_RGB);
         WritableRaster raster = (WritableRaster) image.getData();
         raster.setPixels(0, 0, ancho, alto, píxeles_int);
-        
         image.setData(raster);
-        try {
-			ImageIO.write(image, "jpg", new File("Render.jpg"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        
+        if (exportar) {
+	        try {
+				ImageIO.write(image, "jpg", new File("Render.jpg"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
 		return image;
 	}
 

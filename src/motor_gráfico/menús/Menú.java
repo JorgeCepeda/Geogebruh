@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import motor_gráfico.MotorGráfico;
 
 public abstract class Menú {
-	protected final MotorGráfico motor_gráfico;
+	protected final MotorGráfico<JLabel> motor_gráfico;
 	private final boolean atajo_m;
 	protected Font font_backup;
 	protected String texto_backup;
@@ -16,14 +16,14 @@ public abstract class Menú {
 	protected int tamaño_texto;
 	protected int[] opción_actual = new int[2];
 	
-	protected Menú(MotorGráfico motor_gráfico, boolean atajo_m) {
+	protected Menú(MotorGráfico<JLabel> motor_gráfico, boolean atajo_m) {
 		if (motor_gráfico == null) throw new IllegalArgumentException("El argumento no puede ser null");
 		this.motor_gráfico = motor_gráfico;
 		this.atajo_m = atajo_m;
 	}
 	
 	public JLabel getTexto() {
-		return motor_gráfico.getJLabel();
+		return motor_gráfico.getSalida();
 	}
 	
 	public boolean estáMostrado() {

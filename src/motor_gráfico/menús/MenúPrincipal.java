@@ -1,5 +1,7 @@
 package motor_gráfico.menús;
 
+import javax.swing.JLabel;
+
 import chunks_NoCeldas.Chunks;
 import efectos.Iluminación;
 import motor_gráfico.MotorGráfico;
@@ -14,7 +16,7 @@ public class MenúPrincipal extends Menú {
 	};
 	private final MenúNiveles submenú;
 
-	public MenúPrincipal(MotorGráfico motor_gráfico) {
+	public MenúPrincipal(MotorGráfico<JLabel> motor_gráfico) {
 		super(motor_gráfico, true);
 		tamaño_texto = 20;
 		submenú = new MenúNiveles(motor_gráfico);
@@ -81,7 +83,7 @@ public class MenúPrincipal extends Menú {
 				Iluminación.setSombras(!Iluminación.haySombras());
 				break;
 			case FOTO:
-				motor_gráfico.getPantalla().exportarFrame();
+				motor_gráfico.getPantalla().obtenerFrame(true);
 				break;
 			default:
 				System.out.println("Opción inválida: " + opción);

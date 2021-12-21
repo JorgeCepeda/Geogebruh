@@ -1,13 +1,14 @@
 package motor_gráfico;
 
 import java.awt.EventQueue;
+import java.awt.Image;
+
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import chunks_NoCeldas.Chunks;
 import efectos.Iluminación;
@@ -16,15 +17,15 @@ import gráficos.PantallaMultihilo;
 import motor_gráfico.menús.MenúPrincipal;
 import niveles.Niveles;
 
-import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.Color;
 
 import objetos.Cámara;
 import objetos.Objetos;
 import operaciones.MyMath;
+import otros.AWTImage;
 
-public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
+public class MotorGráfico3D_AWT implements MotorGráfico<Image> {
 	private double[] pos;
 	private double teta_hori, teta_vert, teta_inclin, delta_teta = Math.PI/8;
 	private boolean swBorde, swPrecisión;
@@ -32,7 +33,7 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 	private JFrame frmMotorGráfico;
 	private JTextField txtRender;
 	private JTextField txtCDV;
-	private JLabel lblSalida;
+	private AWTImage imgSalida;
 	private Pantalla pantalla;
 
 	/**
@@ -42,7 +43,7 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 		EventQueue.invokeLater(() -> {
 			try {
 				long start = System.nanoTime();
-				MotorGráfico3D_Swing_Teclado window = new MotorGráfico3D_Swing_Teclado();
+				MotorGráfico3D_AWT window = new MotorGráfico3D_AWT();
 				window.frmMotorGráfico.setVisible(true);
 				System.out.println("Ha tardado " + (System.nanoTime() - start) + " nanosegundos en cargar");
 			} catch (Exception e) {
@@ -54,7 +55,7 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 	/**
 	 * Create the application.
 	 */
-	public MotorGráfico3D_Swing_Teclado() {
+	public MotorGráfico3D_AWT() {
 		initialize();
 	}
 
@@ -73,18 +74,11 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 		frmMotorGráfico.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMotorGráfico.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setBounds(10, 69, 712, 614);
-		frmMotorGráfico.add(panel);
-		panel.setLayout(null);
-		
-		lblSalida = new JLabel("Introduce los datos necesarios");
-		lblSalida.setForeground(Color.GREEN);
-		lblSalida.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblSalida.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSalida.setBounds(0, 0, 712, 614);
-		panel.add(lblSalida);
+		imgSalida = new AWTImage(null);
+		imgSalida.setBackground(Color.BLACK);
+		imgSalida.setBounds(10, 69, 712, 614);
+		frmMotorGráfico.add(imgSalida);
+		imgSalida.setLayout(null);
 		
 		JLabel lblPosición = new JLabel(String.format("Posición inicial (%+.2f,%+.2f,%+.2f)", pos[0], pos[1], pos[2]));
 		lblPosición.setBounds(149, 6, 301, 20);
@@ -133,16 +127,16 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 		btnPrecisión.setBounds(508, 32, 115, 23);
 		frmMotorGráfico.add(btnPrecisión);
 		
-		MenúPrincipal menú = new MenúPrincipal(this);
+//		MenúPrincipal menú = new MenúPrincipal(this);
 		
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(e -> {
 			if (e.getID() == KeyEvent.KEY_PRESSED && frmMotorGráfico.getFocusOwner() == btnEjecutar) {
-				boolean menú_ocultado = false;
-				if (menú.estáMostrado()) menú_ocultado = menú.ejecutarInput(e.getKeyCode());
-				else {
+//				boolean menú_ocultado = false;
+//				if (menú.estáMostrado()) menú_ocultado = menú.ejecutarInput(e.getKeyCode());
+//				else {
 					switch (e.getKeyCode()) {
 					case KeyEvent.VK_M:
-						menú.setMostrado(true);
+//						menú.setMostrado(true); //TODO añadir soporte
 						break;
 					case KeyEvent.VK_W:
 						pos[0] += Math.cos(teta_hori);
@@ -193,8 +187,8 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 					pos = MyMath.fix(pos);
 					
 					lblPosición.setText(String.format("Posición actual: (%+.2f,%+.2f,%+.2f)", pos[0], pos[1], pos[2]));
-				}
-				if (!menú.estáMostrado() && !menú_ocultado) {
+//				}
+//				if (!menú.estáMostrado() && !menú_ocultado) {
 					// Renderizar
 					int render = Integer.parseInt(txtRender.getText()) * 5;
 					Cámara cámara = new Cámara(pos, render, swPrecisión);
@@ -207,9 +201,9 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 					
 					long start = System.nanoTime();
 					pantalla.renderizar();
-					lblSalida.setText(pantalla.textoRender());
+					imgSalida.setImage(pantalla.obtenerFrame(false).getScaledInstance(imgSalida.getWidth(), imgSalida.getHeight(), Image.SCALE_SMOOTH));
 					System.out.println("Tiempo transcurrido: " + (System.nanoTime() - start) + " nanosegundos");
-				}
+//				}
 			}
 	        return false;
 		});
@@ -230,7 +224,7 @@ public class MotorGráfico3D_Swing_Teclado implements MotorGráfico<JLabel> {
 	}
 	
 	@Override
-	public JLabel getSalida() {
-		return lblSalida;
+	public Image getSalida() {
+		return imgSalida.getImage();
 	}
 }
