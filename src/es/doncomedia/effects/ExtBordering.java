@@ -57,12 +57,14 @@ public class ExtBordering {
 	 */
 	private boolean hasBorder(int i, int j, int k, int l, int thickness, GameObject obj) {
 		int row = i+k, col = j+l;
-		boolean validObj = s.objTable()[row][col] == null
-			|| Objects.concreteObj(s.objTable()[row][col], s.posTable()[row][col]) != obj && s.distTable()[row][col] > s.distTable()[i][j];
-			
-		boolean validCell = (k != 0 || l != 0) && MyMath.isInside(row, col, s.colorTable(), s.extra());
 		
-		return validCell && validObj && k*k+l*l <= thickness*thickness &&
-			(!extBorders[row][col] || borderDistTable[row][col] > s.distTable()[i][j]);
+		if ((k != 0 || l != 0) && MyMath.isInside(row, col, s.colorTable(), s.extra())) {
+			boolean validObj = s.objTable()[row][col] == null
+				|| Objects.concreteObj(s.objTable()[row][col], s.posTable()[row][col]) != obj && s.distTable()[row][col] > s.distTable()[i][j];
+			
+			return validObj && k*k+l*l <= thickness*thickness &&
+				(!extBorders[row][col] || borderDistTable[row][col] > s.distTable()[i][j]);
+		}
+		return false;
 	}
 }
