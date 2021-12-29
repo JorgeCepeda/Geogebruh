@@ -16,8 +16,8 @@ public class Pixel implements Runnable {
 	private Photon photon;
 	private double[] iniCoord, phOrient;
 	
-	public Pixel(int i, int j, Screen s, double[] iniCoord, double[] orient_fotón, double[] despl_plano, double backwardsSpeed) {
-		init(i, j, s, iniCoord, orient_fotón, despl_plano, backwardsSpeed);
+	public Pixel(int i, int j, Screen s, double[] iniCoord, double[] phOrient, double[] planeDispl, double backwardsSpeed) {
+		init(i, j, s, iniCoord, phOrient, planeDispl, backwardsSpeed);
 		photon = new Photon();
 	}
 	

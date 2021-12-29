@@ -69,7 +69,7 @@ public class MultithreadedScreen extends Screen { //TODO puede ser útil pasar la
 		int[] dimens = getDimensions();
 		double backwardsSpeed = 0.1;
 		if (camera().isPrecise()) backwardsSpeed = 0.001;
-		if (camera().hasFOV()) planeDispl = MyMath.multipl(phOrient, MyMath.fix((double) dimens[1] / 2 / Math.tan(camera().getFOVTheta() / 2)));
+		if (camera().hasFOV()) planeDispl = MyMath.multipl(phOrient, MyMath.fix(dimens[1] / 2.0 / Math.tan(camera().getFOVTheta() / 2)));
 		
 		HashSet<Future<?>> sections = new HashSet<>((int) (sectionsVert*sectionsHori*1.3));
 		// Screen division in independent parallel parts
