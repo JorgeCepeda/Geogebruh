@@ -63,7 +63,7 @@ public class Screen implements Serializable {
 		Photon photon = new Photon();
 		init();
 			
-		double[] coord, iniCoord = camera.getPos(), phOrient = orientCam(), planeDispl = null;
+		double[] coord, iniCoord = camera.getPos(), phOrient = camOrient(), planeDispl = null;
 		double backwardsSpeed = camera.isPrecise() ? 0.001 : 0.1;
 		
 		if (camera.hasFOV()) planeDispl = MyMath.multipl(phOrient, MyMath.fix(width / 2.0 / Math.tan(camera.getFOVTheta() / 2)));
@@ -238,7 +238,7 @@ public class Screen implements Serializable {
 		y -= (height + 2*extra - 1) / 2.0;
 		x -= (width + 2*extra - 1) / 2.0;
 		
-		return MyMath.fix(Vector.centerToCell(y, x, centralCell, orientCam(1), camera.getRotation()));
+		return MyMath.fix(Vector.centerToCell(y, x, centralCell, camOrient(1), camera.getRotation()));
 	}
 	
 	private void startTimer() {
@@ -288,11 +288,11 @@ public class Screen implements Serializable {
 		this.camera = camera;
 	}
 	
-	public double[] orientCam() {
+	public double[] camOrient() {
 		return camera.getOrient();
 	}
 	
-	public double orientCam(int i) {
+	public double camOrient(int i) {
 		return camera.getOrient(i);
 	}
 	

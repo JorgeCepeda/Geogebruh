@@ -65,7 +65,7 @@ public class MultithreadedScreen extends Screen { //TODO puede ser útil pasar la
 	public synchronized void render() {
 		init();
 
-		double[] iniCoord = camera().getPos(), phOrient = orientCam(), planeDispl = null;
+		double[] iniCoord = camera().getPos(), phOrient = camOrient(), planeDispl = null;
 		int[] dimens = getDimensions();
 		double backwardsSpeed = 0.1;
 		if (camera().isPrecise()) backwardsSpeed = 0.001;

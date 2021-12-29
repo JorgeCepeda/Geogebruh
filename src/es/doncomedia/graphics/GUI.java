@@ -94,7 +94,7 @@ public class GUI {
 	}
 	
 	public static void orientation(Screen s) {
-		Object[] data = modifyRowAndColor(s, s.extra(), String.format("Orient: {%.3f,%.3f,%.3f}", s.orientCam(0), s.orientCam(1), s.orientCam(2)), "#FFFFFF", -1);
+		Object[] data = modifyRowAndColor(s, s.extra(), String.format("Orient: {%.3f,%.3f,%.3f}", s.camOrient(0), s.camOrient(1), s.camOrient(2)), "#FFFFFF", -1);
 		s.charTable()[s.extra()] = (char[]) data[0];
 		s.colorTable()[s.extra()] = (String[]) data[1];
 	}
