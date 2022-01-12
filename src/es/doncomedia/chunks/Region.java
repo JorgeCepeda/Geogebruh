@@ -19,9 +19,9 @@ public class Region implements Serializable {
 		Photon photon = new Photon();
 		
 		// Checkered 3D traverse for each object
+		fill:
 		for (GameObject object : available) {
 			if (!chunkObjs.contains(object)) {
-				boolean swCollision = false;
 				for (int x = 0; x < dimens[0]; x++) {
 					checkInterruption(chunkObjs);
 					for (int y = 0; y < dimens[1]; y++) {
@@ -30,13 +30,10 @@ public class Region implements Serializable {
 							
 							if (object.collision(photon)) {
 								chunkObjs.add(object);
-								swCollision = true;
-								break;
+								continue fill;
 							}
 						}
-						if (swCollision) break;
 					}
-					if (swCollision) break;
 				}
 			}
 		}
