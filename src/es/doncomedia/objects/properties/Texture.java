@@ -3,6 +3,7 @@ package es.doncomedia.objects.properties;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
@@ -119,8 +120,8 @@ public class Texture implements Property {
 	 */
 	public Color colorAtPixel(double[] coord) {
 		if (hasPath) {
-			try {
-				BufferedImage img = ImageIO.read(new File(pathOrColor));
+			try (InputStream texStream = Texture.class.getResourceAsStream(pathOrColor)) {
+				BufferedImage img = ImageIO.read(texStream);
 				int x = (int) (coord[0] / scaleX + img.getWidth() / 2.0), y = (int) (-coord[1] / scaleY + img.getHeight() / 2.0);
 				
 				if (x >= img.getWidth() || y >= img.getHeight() || x < 0 || y < 0) return null;
