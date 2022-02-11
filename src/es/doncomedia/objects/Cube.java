@@ -6,9 +6,9 @@ public class Cube extends GameObject {
 	private static final long serialVersionUID = 1L;
 	private double side;
 	
-	public Cube(double[] pos, double lado, String color) {
+	public Cube(double[] pos, double side, String color) {
 		super(pos, color, true);
-		setSide(lado);
+		setSide(side);
 	}
 	
 	public double getSide() {
