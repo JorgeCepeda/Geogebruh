@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import es.doncomedia.objects.properties.Property;
 import es.doncomedia.operations.Vector;
 
-public abstract class BaseObject implements Serializable { //TODO traducir desde aquí
+public abstract class BaseObject implements Serializable { //TODO traducir desde aquÃ­
 	public static final String COLOR = "color", BORDER = "borde";
 	private static final long serialVersionUID = 1L;
 	
@@ -103,6 +103,7 @@ public abstract class BaseObject implements Serializable { //TODO traducir desde
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Property> T addProperty(String name, Property property) {
+		//TODO a PropertyHandler would scale better, for example adding a texture would create its texture map automatically if needed
 		if (properties == null) properties = new ConcurrentHashMap<>();
 		return (T) properties.putIfAbsent(name, property);
 	}
