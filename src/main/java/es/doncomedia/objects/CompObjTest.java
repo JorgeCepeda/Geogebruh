@@ -50,7 +50,7 @@ public class CompObjTest extends CompoundObject {
 		
 		Texture grass = new Texture(
 			new InvisiblePrism(new double[] {-5,0,0}, 5, Ref.CENTER, new Object[] {11.0,11.0}, Bases.RECTANGULAR),
-			"/grass.png",
+			"/textures/grass.png",
 			true
 		);
 		grass.setScale(10.0/16, 10.0/16);
