@@ -61,7 +61,7 @@ public class MainMenu extends Menu {
 	protected void executeOption() {
 		Option option = options[chosenOption[0]][chosenOption[1]];
 		if (option != null) {
-			System.out.println("Ejecutada opción: " + option.name);
+			System.out.println("Ejecutada opciÃ³n: " + option.name);
 			switch (option) {
 			case LOAD_LEVEL:
 				submenu.setDisplayed(true);

@@ -110,8 +110,8 @@ public class Screen implements Serializable {
 								else break;
 							} 
 							
-							char character = '·';
-							if (dist < 1) character = '×';
+							char character = 'Â·';
+							if (dist < 1) character = 'Ã—';
 							else if (dist <= 2) character = '#';
 							else if (dist <= 8) character = '+';
 							else if (dist <= 14) character = '-';

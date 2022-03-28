@@ -30,12 +30,12 @@ public class LevelsMenu extends Menu {
 	static {
 		tips.add("Puedes hacer EJERCICIO para mantenerte EN FORMA");
 		tips.add("Algo peor que las oraciones incompletas es");
-		tips.add("Si te quedas sin memoria, compra más");
-		tips.add("Baterías no incluidas");
-		tips.add("El Konami Code no está implementado");
-		tips.add("Esto es demasiado difícil para periodistas");
+		tips.add("Si te quedas sin memoria, compra mÃ¡s");
+		tips.add("BaterÃ­as no incluidas");
+		tips.add("El Konami Code no estÃ¡ implementado");
+		tips.add("Esto es demasiado difÃ­cil para periodistas");
 		tips.add("test7");
-		tips.add("No, es verdad, me habías dicho que no lo sabías");
+		tips.add("No, es verdad, me habÃ­as dicho que no lo sabÃ­as");
 		tips.add("Shakespeare una vez dijo: \"An SSL error has occurred and a secure connection to the server cannot be made\"");
 	}
 	
@@ -67,7 +67,7 @@ public class LevelsMenu extends Menu {
 			Level level = levels.get(chosenOption[0]);
 			StringBuilder sb = new StringBuilder(150);
 			sb.append("Cargando nivel: ").append(level.getName());
-			sb.append(".\n¿Sabías que...? ");
+			sb.append(".\nÂ¿SabÃ­as que...? ");
 			
 			sb.append(tips.get(rnd.nextInt(tips.size())));
 			System.out.println(sb.toString());

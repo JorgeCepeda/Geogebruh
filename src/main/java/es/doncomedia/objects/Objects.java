@@ -19,7 +19,7 @@ public class Objects {
 		Levels.load(Levels.LEVEL_1);
 //		Levels.load(Levels.archivedLevel(Levels.LEVEL_1.getName()));
 		if (debugObjs()) {
-			System.err.println("Cerrando programa debido a bugs en la lista de objects.");
+			System.err.println("Cerrando programa debido a bugs en la lista de objetos.");
 			System.exit(-1);
 		}
 	}
@@ -54,7 +54,7 @@ public class Objects {
 	
 	public static boolean debugObjs() {
 		StringBuilder sb = new StringBuilder(500);
-		sb.append("Comenzando debug de objetos compuestos, los siguientes objetos se contienen a sÌ mismos:\n");
+		sb.append("Comenzando debug de objetos compuestos, los siguientes objetos se contienen a s√≠ mismos:\n");
 		boolean swFound = false;
 		for (GameObject object : objs().values()) {
 			if (object instanceof CompoundObject && search(object, ((CompoundObject) object).objs())) {
@@ -64,9 +64,9 @@ public class Objects {
 		}
 		sb.append("Finalizada fase 1 del debug. ");
 		
-		if (swFound) sb.append("Al haber problemas jer·rquicos no se puede continuar el debug.\n");
+		if (swFound) sb.append("Al haber problemas jer√°rquicos no se puede continuar el debug.\n");
 		else {
-			sb.append("Ninguno encontrado.\nLos siguientes objetos est·n en dos o m·s objetos distintos:\n");
+			sb.append("Ninguno encontrado.\nLos siguientes objetos est√°n en dos o m√°s objetos distintos:\n");
 			HashSet<GameObject> objects = new HashSet<>();
 			for (GameObject object : objs().values()) {
 				if (!objects.add(object)) {
@@ -74,7 +74,7 @@ public class Objects {
 					swFound = true;
 				}
 				if (object instanceof CompoundObject && !hasNoDuplicates(((CompoundObject) object).objs(), objects)) {
-					sb.append(" -Alg˙n objeto de " + object + "\n");
+					sb.append(" -Alg√∫n objeto de " + object + "\n");
 					swFound = true;
 				}
 			}
