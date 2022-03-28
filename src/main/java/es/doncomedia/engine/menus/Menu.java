@@ -123,7 +123,7 @@ public abstract class Menu {
 	protected enum Option {
 		LOAD_CHUNKS("Cargar chunks"),
 		SAVE_CHUNKS("Guardar chunks"),
-		LIGHTING("Activar iluminación"),
+		LIGHTING("Activar iluminaciÃ³n"),
 		SHADES("Activar sombras"),
 		SCREENSHOT("Exportar imagen"),
 		LOAD_LEVEL("Cargar nivel"); //TODO field of view and others?

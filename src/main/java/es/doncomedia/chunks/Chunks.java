@@ -154,7 +154,7 @@ public class Chunks {
 						BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(copy), size)) {
 						
 						byte[] read = new byte[size];
-						if (bis.read(read) != size) throw new IOException("El archivo no se ha leído correctamente");
+						if (bis.read(read) != size) throw new IOException("El archivo no se ha leÃ­do correctamente");
 						bos.write(read);
 					} catch (IOException e) {
 						System.err.println("No se ha podido hacer una copia de " + file.getPath() + ": " + e.getMessage());

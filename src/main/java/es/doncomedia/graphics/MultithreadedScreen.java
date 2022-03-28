@@ -8,7 +8,7 @@ import es.doncomedia.objects.Camera;
 import es.doncomedia.objects.Photon;
 import es.doncomedia.operations.MyMath;
 
-public class MultithreadedScreen extends Screen { //TODO puede ser útil pasar la creación de secciones a la inicialización y tener un método para pasarle datos, para cuando se reutilice una pantalla, hasta entonces no hace falta
+public class MultithreadedScreen extends Screen { //TODO puede ser Ãºtil pasar la creaciÃ³n de secciones a la inicializaciÃ³n y tener un mÃ©todo para pasarle datos, para cuando se reutilice una pantalla, hasta entonces no hace falta
 	private static final long serialVersionUID = 1L;
 
 	private class Section implements Runnable {

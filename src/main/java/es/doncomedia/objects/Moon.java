@@ -5,9 +5,9 @@ import es.doncomedia.objects.abstracts.GameObject;
 import es.doncomedia.operations.MyMath;
 
 /*
- * ¿No es cierto, ángel de amor,
+ * Â¿No es cierto, Ã¡ngel de amor,
  * que en esta apartada orilla
- * más puro el debugger brilla
+ * mÃ¡s puro el debugger brilla
  * y se programa mejor?
  */
 public class Moon extends CompoundObject {

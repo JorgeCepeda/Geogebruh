@@ -395,7 +395,7 @@ public class Levels {
 			// Object declarations
 			add(new Moon(new double[] {-15,30,0}, "white"));
 		}
-	}, SPAIN_CUBE = new Level(new double[] {10,15,-10}, new double[] {Math.PI/2,0,0}, "ESPAÑA") {
+	}, SPAIN_CUBE = new Level(new double[] {10,15,-10}, new double[] {Math.PI/2,0,0}, "ESPAÃ‘A") {
 		@Override
 		public void load() {
 			setObjs(new LinkedHashMap<>());
