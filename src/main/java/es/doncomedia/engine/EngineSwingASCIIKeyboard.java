@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import es.doncomedia.chunks.Chunks;
 import es.doncomedia.effects.Lighting;
@@ -68,7 +69,7 @@ public class EngineSwingASCIIKeyboard implements GFXEngine<JLabel> {
 		frmGFXEngine = new JFrame("exe.exe - Geoge🅱ruh");
 		frmGFXEngine.setResizable(false);
 		frmGFXEngine.setBounds(100, 1, 738, 723);
-		frmGFXEngine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGFXEngine.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frmGFXEngine.setLayout(null);
 		
 		JPanel panel = new JPanel();

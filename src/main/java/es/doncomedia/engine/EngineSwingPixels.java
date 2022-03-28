@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.JButton;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
@@ -69,7 +70,7 @@ public class EngineSwingPixels implements GFXEngine<Image> {
 		frmGFXEngine = new JFrame("exe.exe - Geoge🅱ruh");
 		frmGFXEngine.setResizable(false);
 		frmGFXEngine.setBounds(100, 1, 738, 723);
-		frmGFXEngine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGFXEngine.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frmGFXEngine.setLayout(null);
 		
 		JPanel panel = new JPanel();

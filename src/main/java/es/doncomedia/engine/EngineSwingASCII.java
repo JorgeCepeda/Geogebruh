@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import es.doncomedia.chunks.Chunks;
 import es.doncomedia.effects.Lighting;
@@ -69,7 +70,7 @@ public class EngineSwingASCII implements GFXEngine<JLabel> {
 		frmGFXEngine = new JFrame("exe.exe - Geoge🅱ruh");
 		frmGFXEngine.setResizable(false);
 		frmGFXEngine.setBounds(100, 1, 738, 723);
-		frmGFXEngine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmGFXEngine.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frmGFXEngine.setLayout(null);
 		
 		JPanel panel = new JPanel();

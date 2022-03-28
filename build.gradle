@@ -1,0 +1,15 @@
+plugins {
+    id 'eclipse'
+    id 'java'
+}
+
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "no"
+}
+
+dependencies {
+	implementation fileTree(dir: 'lib', include: '*.jar')
+}
+
+sourceCompatibility = '1.17'
