@@ -24,4 +24,4 @@ dependencies {
 	implementation fileTree(dir: 'lib', include: '*.jar')
 }
 
-sourceCompatibility = '1.17'
+sourceCompatibility = '1.8'
