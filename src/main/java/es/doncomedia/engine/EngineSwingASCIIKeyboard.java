@@ -177,10 +177,10 @@ public class EngineSwingASCIIKeyboard implements GFXEngine<JLabel> {
 						thetaVert += thetaDelta;
 						break;
 					case KeyEvent.VK_V:
-						thetaInclin -= thetaDelta;
+						thetaInclin += thetaDelta;
 						break;
 					case KeyEvent.VK_B:
-						thetaInclin += thetaDelta;
+						thetaInclin -= thetaDelta;
 						break;
 					default:
 						System.out.println("Input no reconocido");

@@ -174,10 +174,10 @@ public class EngineSwingASCII implements GFXEngine<JLabel> {
 					thetaVert += thetaDelta;
 					break;
 				case 'v':
-					thetaInclin -= thetaDelta;
+					thetaInclin += thetaDelta;
 					break;
 				case 'b':
-					thetaInclin += thetaDelta;
+					thetaInclin -= thetaDelta;
 					break;
 				default:
 					System.out.println("Input no reconocido");
