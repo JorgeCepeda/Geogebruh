@@ -183,7 +183,7 @@ public class Screen implements Serializable {
 				if (colorTable[i][j] != null && !colorTable[i][j].equals(color)) {
 					if (charTable[i][j] != ' ' && !"".equals(color)) sb.append("</span>");
 					color = colorTable[i][j];
-					sb.append("<span style=\"color:" + color + ";\">");
+					sb.append("<span style=\"color:").append(color).append(";\">");
 				}
 				sb.append(charTable[i][j]);
 				//sb.append(j % 10); //DEBUG
