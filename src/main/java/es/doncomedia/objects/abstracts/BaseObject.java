@@ -6,9 +6,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import es.doncomedia.objects.properties.Property;
 import es.doncomedia.operations.Vector;
 
-public abstract class BaseObject implements Serializable { //TODO traducir desde aquí
-	public static final String COLOR = "color", BORDER = "borde";
+public abstract class BaseObject implements Serializable {
+	public static final String COLOR = "color", BORDER = "border";
 	private static final long serialVersionUID = 1L;
+	protected double[] pos, orient = Vector.orientSTD(), rotation = Vector.rotationSTD();
 	
 	/**
 	 * Compound object's objects access properties to obtain theirs, updating them if they are modified.
@@ -16,7 +17,6 @@ public abstract class BaseObject implements Serializable { //TODO traducir desde
 	 * (Example: color lighter than the main color: to obtain the color it would access the property and would operate on it without modifying it)
 	 */
 	private ConcurrentHashMap<String, Property> properties;
-	private double[] pos, orient = Vector.orientSTD(), rotation = Vector.rotationSTD();
 
 	protected BaseObject(double[] pos) {
 		setPos(pos, false);
@@ -32,6 +32,9 @@ public abstract class BaseObject implements Serializable { //TODO traducir desde
 		return pos[i];
 	}
 
+	/**
+	 * When linking an array it shouldn't be modified afterwards to prevent bugs
+	 */
 	public void setPos(double[] pos, boolean link) {
 		this.pos = link ? pos : pos.clone();
 	}

@@ -24,6 +24,6 @@ public class Sphere extends GameObject {
 
 	@Override
 	public boolean collision(Photon photon) {
-		return Dist.pointToPoint(photon.getPos(), getPos()) <= radius;
+		return Dist.pointToPoint(photon.getPos(), pos) <= radius;
 	}
 }

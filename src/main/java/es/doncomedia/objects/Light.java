@@ -93,7 +93,7 @@ public class Light extends GameObject {
 	 */
 	public int[] lightUp(double[] point, int[] objColor) {
 		if (!turnedOn || intensity < 1) return new int[3];
-		double lux = intensity / Math.pow(Dist.pointToPoint(getPos(), point) / 100.0, 2);
+		double lux = intensity / Math.pow(Dist.pointToPoint(pos, point) / 100.0, 2);
 		
 		if (lux < 1) return new int[3];
 		if (lux > 100) lux = 100;
@@ -109,9 +109,9 @@ public class Light extends GameObject {
 	 * @see Light#lightUp(double[], int[])
 	 * @return Lighting on a white point, it's used to combine several lights on a point of any color later
 	 */
-	public int[] lightUpWhite(double[] punto) {
+	public int[] lightUpWhite(double[] point) {
 		if (!turnedOn || intensity < 1) return new int[3];
-		double lux = intensity / Math.pow(Dist.pointToPoint(getPos(), punto) / 100.0, 2);
+		double lux = intensity / Math.pow(Dist.pointToPoint(pos, point) / 100.0, 2);
 		
 		if (lux < 1) return new int[3];
 		if (lux > 100) lux = 100;
@@ -128,11 +128,11 @@ public class Light extends GameObject {
 	 * @return the combined lighting on a surface
 	 */
 	public static int[] applyLight(int[] light, int[] surfaceColor) {
-		int[] iluminado = new int[3];
-		for (int i = 0; i < iluminado.length; i++) {
-			iluminado[i] = light[i] * surfaceColor[i] / 255;
+		int[] totalLight = new int[3];
+		for (int i = 0; i < totalLight.length; i++) {
+			totalLight[i] = light[i] * surfaceColor[i] / 255;
 		}
-		return iluminado;
+		return totalLight;
 	}
 
 	@Override
@@ -144,8 +144,8 @@ public class Light extends GameObject {
 	 * Executes that method with a new photon
 	 * @see Light#canLightUp(double[], Photon)
 	 */
-	public boolean canLightUp(double[] punto) {
-		return canLightUp(punto, new Photon());
+	public boolean canLightUp(double[] point) {
+		return canLightUp(point, new Photon());
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class Light extends GameObject {
 	 * @return whether it can light that point up
 	 */
 	public boolean canLightUp(double[] point, Photon photon) {
-		double[] lightPos = getPos(), phOrient = MyMath.unitary(MyMath.vector(point, lightPos)), coord = MyMath.sum(point, MyMath.multipl(phOrient, 0.3));
+		double[] lightPos = pos, phOrient = MyMath.unitary(MyMath.vector(point, lightPos)), coord = MyMath.sum(point, MyMath.multipl(phOrient, 0.3));
 		double lightDist = Dist.pointToPoint(point, lightPos), spdMultiplier, dist;
 
 		// Photon projection
@@ -194,7 +194,7 @@ public class Light extends GameObject {
 	 * @return whether it can light that point up
 	 */
 	public boolean canLightUpNoOcclusion(double[] point, GameObject obj, Photon photon) {
-		double[] point2 = MyMath.sum(point, MyMath.unitary(MyMath.vector(point, getPos())));
+		double[] point2 = MyMath.sum(point, MyMath.unitary(MyMath.vector(point, pos)));
 		Chunk chunk = Chunks.getChunk(point2);
 		if (chunk != null && !chunk.isEmpty()) {
 			photon.setPos(point2, true);
@@ -209,7 +209,7 @@ public class Light extends GameObject {
 //	 * @return whether it can light that point up
 //	 */
 //	public boolean canLightUp(double[] point, Photon photon) {
-//		if (Photon.proyect(point, getPos(), 0.3, true, photon, photon::collision)) return photon.collObj() == this;
+//		if (Photon.project(point, getPos(), 0.3, true, photon, photon::collision)) return photon.collObj() == this;
 //		return true;
 //	}
 }

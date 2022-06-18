@@ -14,10 +14,10 @@ public class Ellipsoid extends GameObject {
 
 	@Override
 	public boolean collision(Photon photon) {
-		double[] point = Objects.rotateAround(photon, this);
-		return Math.pow((point[0] - getPos(0)) / semiaxes[0], 2) +
-			Math.pow((point[1] - getPos(1)) / semiaxes[1], 2) +
-			Math.pow((point[2] - getPos(2)) / semiaxes[2], 2) <= 1;
+		double[] point = Objects.rotateAround(photon, this), pos = this.pos;
+		return Math.pow((point[0] - pos[0]) / semiaxes[0], 2) +
+			Math.pow((point[1] - pos[1]) / semiaxes[1], 2) +
+			Math.pow((point[2] - pos[2]) / semiaxes[2], 2) <= 1;
 	}
 
 	public double[] getSemiaxes() {

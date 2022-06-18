@@ -14,11 +14,11 @@ public class Bowl extends CompoundObject {
 	
 	@SuppressWarnings("serial")
 	private void init() {
-		double[] displ = MyMath.multipl(getOrient(), 10);
+		double[] displ = MyMath.multipl(orient, 10), currentPos = pos;
 		
-		objs().add(new Sphere(getPos(), 9));
+		objs().add(new Sphere(currentPos, 9));
 		objs(0).changeProperty(COLOR, property(COLOR));
-		Sphere sphere = new Sphere(MyMath.sum(getPos(), displ), 11, "yellow");
+		Sphere sphere = new Sphere(MyMath.sum(currentPos, displ), 11, "yellow");
 		
 		objs().add(new NegativeSpace(sphere));
 		
@@ -29,15 +29,17 @@ public class Bowl extends CompoundObject {
 		setUpdate(new Behaviour() {
 			@Override
 			public void run() {
-				objs(0).setPos(getPos(), true);
+				double[] pos = Bowl.this.pos;
+				objs(0).setPos(pos, true);
 				objs(0).changeProperty(COLOR, property(COLOR));
 				updateOrientation();
-				objs(1).setPos(MyMath.sum(getPos(), MyMath.multipl(getOrient(), 11)), true);
+				objs(1).setPos(MyMath.sum(pos, MyMath.multipl(orient, 11)), true);
 			}
 
 			private void updateOrientation() {
-				objs(0).setRotationAndOrient(MyMath.sum(getRotation(), (double[]) objProperties.get("rotation_" + objs(0))));
-				objs(1).setRotationAndOrient(MyMath.sum(getRotation(), (double[]) objProperties.get("rotation_" + objs(1))));
+				double[] rot = rotation;
+				objs(0).setRotationAndOrient(MyMath.sum(rot, (double[]) objProperties.get("rotation_" + objs(0))));
+				objs(1).setRotationAndOrient(MyMath.sum(rot, (double[]) objProperties.get("rotation_" + objs(1))));
 			}
 		});
 		setRotationAndOrient(new double[] {Math.sqrt(2)/2, Math.sqrt(2)/2, 0}, 0);

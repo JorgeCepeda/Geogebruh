@@ -40,12 +40,12 @@ public class Prism extends GameObject {
 	}
 	
 	public Prism(Prism p, boolean border, boolean cloneData) {
-		super(p.getPos(), border);
+		super(p.pos, border);
 		base = p.base;
 		height = p.height;
 		data = cloneData ? p.data.clone() : p.data;
 		ref = p.ref;
-		setRotationAndOrient(p.getRotation());
+		setRotationAndOrient(p.rotation);
 	}
 
 	public double getHeight() {
@@ -82,13 +82,13 @@ public class Prism extends GameObject {
 	 */
 	public Object[] collisionAndProjection(Photon photon) {
 		double[] phPos = photon.getPos(), coord = projectToBase(phPos);
-		return new Object[] {base.collision(coord, data) && validRange(Dist.pointToPlane(phPos, getPos(), getOrient())), coord};
+		return new Object[] {base.collision(coord, data) && validRange(Dist.pointToPlane(phPos, pos, orient)), coord};
 	}
 
 	@Override
 	public boolean collision(Photon photon) {
 		double[] phPos = photon.getPos();
-		return base.collision(projectToBase(phPos), data) && validRange(Dist.pointToPlane(phPos, getPos(), getOrient()));
+		return base.collision(projectToBase(phPos), data) && validRange(Dist.pointToPlane(phPos, pos, orient));
 	}
 
 	private boolean validRange(double scalar) {
@@ -108,7 +108,7 @@ public class Prism extends GameObject {
 	 * @see Vector#project2D(double[], double[], double[], double[])
 	 */
 	public double[] projectToBase(double[] point) {
-		return Vector.project2D(point, getPos(), getOrient(), getRotation());
+		return Vector.project2D(point, pos, orient, rotation);
 	}
 	
 	public static class Bases {

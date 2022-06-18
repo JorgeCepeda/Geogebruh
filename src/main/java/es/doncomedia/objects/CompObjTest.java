@@ -18,9 +18,9 @@ public class CompObjTest extends CompoundObject {
 	@SuppressWarnings("serial")
 	private void init() {
 		/*Test*/
-		double[] displ = MyMath.multipl(getOrient(), 11);
-		objs().add(new Sphere(getPos(), 5));
-		objs().add(new Cube(MyMath.sum(getPos(), displ), 10, "wheat"));
+		double[] displ = MyMath.multipl(orient, 11), currentPos = pos;
+		objs().add(new Sphere(currentPos, 5));
+		objs().add(new Cube(MyMath.sum(currentPos, displ), 10, "wheat"));
 		
 		Border b = new Border("green", 2, 'X');
 		objs(0).changeProperty(BORDER, b);
@@ -35,15 +35,17 @@ public class CompObjTest extends CompoundObject {
 		setUpdate(new Behaviour() {
 			@Override
 			public void run() {
-				objs(0).setPos(getPos(), true);
+				double[] pos = CompObjTest.this.pos;
+				objs(0).setPos(pos, true);
 				objs(0).changeProperty(COLOR, property(COLOR));
 				updateOrientation();
-				objs(1).setPos(MyMath.sum(getPos(), MyMath.multipl(getOrient(), 11)), true);
+				objs(1).setPos(MyMath.sum(pos, MyMath.multipl(orient, 11)), true);
 			}
 
 			private void updateOrientation() {
-				objs(0).setRotationAndOrient(MyMath.sum(getRotation(), (double[]) objProperties.get("rotation_" + objs(0))));
-				objs(1).setRotationAndOrient(MyMath.sum(getRotation(), (double[]) objProperties.get("rotation_" + objs(1))));
+				double[] rot = rotation;
+				objs(0).setRotationAndOrient(MyMath.sum(rot, (double[]) objProperties.get("rotation_" + objs(0))));
+				objs(1).setRotationAndOrient(MyMath.sum(rot, (double[]) objProperties.get("rotation_" + objs(1))));
 			}
 		});
 		setRotationAndOrient(new double[] {0, 1, 0}, Math.PI/4);

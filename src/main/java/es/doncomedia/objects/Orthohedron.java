@@ -28,9 +28,9 @@ public class Orthohedron extends GameObject {
 
 	@Override
 	public boolean collision(Photon photon) {
-		double[] point = Objects.rotateAround(photon, this);
-		return point[0] <= getPos(0) + longX/2 && point[0] >= getPos(0) - longX/2
-			&& point[1] <= getPos(1) + height/2 && point[1] >= getPos(1) - height/2
-			&& point[2] <= getPos(2) + longZ/2 && point[2] >= getPos(2) - longZ/2;
+		double[] point = Objects.rotateAround(photon, this), pos = this.pos;
+		return point[0] <= pos[0] + longX/2 && point[0] >= pos[0] - longX/2
+			&& point[1] <= pos[1] + height/2 && point[1] >= pos[1] - height/2
+			&& point[2] <= pos[2] + longZ/2 && point[2] >= pos[2] - longZ/2;
 	}
 }

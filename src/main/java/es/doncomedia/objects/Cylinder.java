@@ -42,7 +42,7 @@ public class Cylinder extends GameObject {
 
 	@Override
 	public boolean collision(Photon photon) {
-		double[] phPos = photon.getPos(), pos = getPos(), orient = getOrient();
+		double[] phPos = photon.getPos(), pos = this.pos, orient = this.orient;
 		double scalar = Dist.pointToPlane(phPos, pos, orient);
 		return Dist.pointToLine(phPos, pos, orient, scalar) <= radius && validRange(scalar);
 	}

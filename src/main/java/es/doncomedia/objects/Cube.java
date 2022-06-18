@@ -22,10 +22,10 @@ public class Cube extends GameObject {
 	
 	@Override
 	public boolean collision(Photon photon) {
-		double[] point = Objects.rotateAround(photon, this);
+		double[] point = Objects.rotateAround(photon, this), pos = this.pos;
 		double sideHalf = side/2;
-		return point[0] <= getPos(0) + sideHalf && point[0] >= getPos(0) - sideHalf
-			&& point[1] <= getPos(1) + sideHalf && point[1] >= getPos(1) - sideHalf
-			&& point[2] <= getPos(2) + sideHalf && point[2] >= getPos(2) - sideHalf;
+		return point[0] <= pos[0] + sideHalf && point[0] >= pos[0] - sideHalf
+			&& point[1] <= pos[1] + sideHalf && point[1] >= pos[1] - sideHalf
+			&& point[2] <= pos[2] + sideHalf && point[2] >= pos[2] - sideHalf;
 	}
 }
