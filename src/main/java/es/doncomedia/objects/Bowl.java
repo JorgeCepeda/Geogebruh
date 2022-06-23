@@ -7,7 +7,7 @@ import es.doncomedia.operations.MyMath;
 public class Bowl extends CompoundObject {
 	private static final long serialVersionUID = 1L;
 
-	public Bowl (double[] pos, String color) {
+	public Bowl(double[] pos, String color) {
 		super(pos, color, true);
 		init();
 	}

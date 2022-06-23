@@ -13,7 +13,7 @@ import es.doncomedia.operations.MyMath;
 public class Moon extends CompoundObject {
 	private static final long serialVersionUID = 1L;
 
-	public Moon (double[] pos, String color) {
+	public Moon(double[] pos, String color) {
 		super(pos, color, true);
 		init();
 	}
