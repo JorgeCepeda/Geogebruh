@@ -261,6 +261,8 @@ public class Chunks {
 	}
 	
 	public static double skipChunk(double[] pos, double[] orient, Chunk currentChunk) {
+		// Using "Math.toDegrees(Math.atan2(x2 - x1, y2 - y1));" and some conditioning would suffice, but I'll leave it like this,
+		// which along with the 3D version broke a total of 5 times, get a glimpse of my suffering
 		if (Math.abs(orient[1]) == 1) return -1;
 		
 		double newChunkZ = currentChunk.getZ();
