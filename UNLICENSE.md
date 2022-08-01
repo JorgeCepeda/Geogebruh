@@ -1,4 +1,3 @@
-Originally made by Jorge Cepeda on 2022.
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
